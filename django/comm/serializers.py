@@ -1,5 +1,6 @@
+from django.forms import widgets
+from rest_framework import serializers
 from comm.models import User, Room, Message
-from rest_framework import routers, serializers, viewsets
 
 # Get list of online users
 # Get last 100 messages
@@ -15,10 +16,7 @@ class RoomSerializer(serializers.HyperlinkedModelSerializer):
 		fields = ('name', 'description', 'public')
 
 class MessageSerializer(serializers.HyperlinkedModelSerializer):
+	room = serializers.HyperlinkedRelatedField(view_name='room-detail', read_only=True)
 	class Meta:
 		model = Message
-		fields = ('text', 'time', 'at_message', 'room', 'user')
-
-# class PaginatedMessageSerializer(serializers.PaginationSerializer):
-# 	class Meta:
-# 		object_serializer_class = MessageSerializer
+		fields = ('text', 'time', 'room', 'user', 'at_message')

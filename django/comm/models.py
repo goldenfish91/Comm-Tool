@@ -30,7 +30,7 @@ class Message(models.Model):
 		return '%s - %s' % (self.user, self.name)
 
 	text = models.TextField()
-	time = models.DateTimeField(auto_now=True)
+	time = models.DateTimeField(auto_now_add=True)
 	room = models.ForeignKey(Room)
 	user = models.ForeignKey(User)
 	at_message = models.BooleanField(default=False)
