@@ -29,5 +29,5 @@ class RoomViewSet(viewsets.ReadOnlyModelViewSet):
 	serializer_class = RoomSerializer
 
 class MessageViewSet(viewsets.ReadOnlyModelViewSet):
-	queryset = Message.objects.all()
+	queryset = Message.objects.all().order_by('-time')
 	serializer_class = MessageSerializer
